@@ -19,7 +19,9 @@ export function beforeRegistration(Vue, config, store, isServer) {
 
         const invokePlaceOrder = () => {
             if (isCurrentPaymentMethod) {
-                Vue.prototype.$bus.$emit('checkout-do-placeOrder', {})
+                Vue.prototype.$bus.$emit('checkout-do-placeOrder', {
+                    payment_method_nonce: store['payment-braintree'].nonce
+                })
             }
         }
         Vue.prototype.$bus.$on('checkout-before-placeOrder', invokePlaceOrder)
