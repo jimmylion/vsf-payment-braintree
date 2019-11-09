@@ -81,12 +81,12 @@ export default {
         this.dropinInstance = await dropin.create({
           authorization,
           container: '#braintree',
-          threeDSecure: true
-          // paypal: {
-          //   flow: 'checkout',
-          //   amount: this.getTransactions().amount.total,
-          //   currency: this.getTransactions().amount.currency
-          // }
+          threeDSecure: true,
+          paypal: {
+            flow: 'checkout',
+            amount: this.getTransactions().amount.total,
+            currency: this.getTransactions().amount.currency
+          }
         });
 
         this.loader = false;
