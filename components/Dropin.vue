@@ -56,7 +56,7 @@ export default {
               }
             });
             this.nonce = payload.nonce;
-            this.$store.dispatch('payment-braintree/setNonce', this.nonce);
+            this.$store.dispatch('braintree/setNonce', this.nonce);
             this.$emit('success');
             this.loader = false
             // this.$bus.$emit('checkout-do-placeOrder', {

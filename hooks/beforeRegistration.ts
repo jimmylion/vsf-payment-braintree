@@ -10,17 +10,11 @@ export function beforeRegistration(Vue, config, store, isServer) {
         'offline': false
     })
 
-    if (!Vue.prototype.$isServer) {
-
-        let isCurrentPaymentMethod = false
-        store.watch((state) => state.checkout.paymentDetails, (prevMethodCode, newMethodCode) => {
-            isCurrentPaymentMethod = newMethodCode === CURRENT_METHOD_CODE
-        })
-
+    if (!isServer) {
         const invokePlaceOrder = () => {
-            if (isCurrentPaymentMethod) {
+            if (store.state.checkout.paymentDetails.paymentMethod === CURRENT_METHOD_CODE) {
                 Vue.prototype.$bus.$emit('checkout-do-placeOrder', {
-                    payment_method_nonce: store['payment-braintree'].nonce
+                    payment_method_nonce: store.state['braintree'].nonce
                 })
             }
         }
