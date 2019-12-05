@@ -12,7 +12,7 @@ export function beforeRegistration(Vue, config, store, isServer) {
 
     if (!isServer) {
         const invokePlaceOrder = () => {
-            if (store.state.checkout.paymentDetails.paymentMethod === CURRENT_METHOD_CODE) {
+            if (store.state.checkout.paymentDetails.paymentMethod.includes('CURRENT_METHOD_CODE')) {
                 Vue.prototype.$bus.$emit('checkout-do-placeOrder', {
                     payment_method_nonce: store.state['braintree'].nonce
                 })
